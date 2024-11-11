@@ -2,18 +2,20 @@
   <div id="app">
     <form @submit.prevent="handleSubmit">
       <div>
+        <label for="username">Nome</label>
+        <input type="text" v-model="name" id="name" required />
+      </div>
+      <div>
         <label for="username">E-mail</label>
         <input type="text" v-model="email" id="email" required />
       </div>
       <div>
-        <label for="password">Senha:</label>
+        <label for="password">Senha</label>
         <input type="password" v-model="password" id="password" required />
       </div>
-      <button type="submit">Entrar</button>
+      <button type="submit">Cadastrar</button>
       <hr>
-      <button @click="goToHome">Cadastrar</button>
     </form>
-    <p v-if="loginFailed" style="color: red;">Usuário ou senha inválidos!</p>
   </div>
 </template>
 
@@ -23,16 +25,12 @@ export default {
     return {
       username: '',
       password: '',
-      loginFailed: false,
     };
   },
   methods: {
     handleSubmit() {
       
     },
-    goToHome() {
-      this.$router.push({name: 'register'})
-    }
   },
 };
 </script>
