@@ -18,6 +18,8 @@
 </template>
 
 <script>
+import authService from '../services/auth';
+
 export default {
   data() {
     return {
@@ -28,7 +30,14 @@ export default {
   },
   methods: {
     handleSubmit() {
-      
+      authService.login({ email: this.email, password: this.password })
+        .then(response => {
+          localStorage.setItem('token', response.data.token);
+          console.log('ok')
+        })
+        .catch(error => {
+          console.error('Erro de autenticação:', error.response);
+        });
     },
     goToHome() {
       this.$router.push({name: 'register'})

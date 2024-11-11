@@ -23,15 +23,23 @@
 export default {
   data() {
     return {
-      username: '',
+      name: '',
+      email: '',
       password: '',
     };
   },
   methods: {
     handleSubmit() {
-      
+      authService.register({ name: this.name, email: this.email, password: this.password })
+        .then(response => {
+          console.log(response)
+          this.$router.push('/dashboard');
+        })
+        .catch(error => {
+          console.error('Erro ao cadastrar:', error.response);
+        });
     },
-  },
+  }
 };
 </script>
 
