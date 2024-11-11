@@ -28,14 +28,22 @@ export default {
       loginFailed: false,
     };
   },
+  created() {
+    if (authService.isAuthenticated()) {
+      this.$router.push('/dashboard');
+    } else {
+      this.$router.push('/');
+    }
+  },
   methods: {
     handleSubmit() {
       authService.login({ email: this.email, password: this.password })
         .then(response => {
           localStorage.setItem('token', response.data.token);
-          console.log('ok')
+          this.$router.push('/dashboard');
         })
         .catch(error => {
+          this.loginFailed = true
           console.error('Erro de autenticação:', error.response);
         });
     },

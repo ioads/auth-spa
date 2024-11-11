@@ -11,11 +11,19 @@ const authService = {
         return axios.post(API_URL + 'login', user);
     },
 
+    logout() {
+        return localStorage.removeItem('token');
+    },
+
     getUser() {
         return axios.get(API_URL + 'user', {
             headers: { Authorization: `Bearer ${localStorage.getItem('token')}` }
         });
     },
+
+    isAuthenticated() {
+        return !!localStorage.getItem('token');
+    }
 };
 
 export default authService;

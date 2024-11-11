@@ -20,6 +20,8 @@
 </template>
 
 <script>
+import authService from '../services/auth';
+
 export default {
   data() {
     return {
@@ -32,7 +34,7 @@ export default {
     handleSubmit() {
       authService.register({ name: this.name, email: this.email, password: this.password })
         .then(response => {
-          console.log(response)
+          localStorage.setItem('token', response.data.token);
           this.$router.push('/dashboard');
         })
         .catch(error => {
